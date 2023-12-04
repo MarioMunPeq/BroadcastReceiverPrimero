@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textoRed: TextView
     private lateinit var connectivityManager: ConnectivityManager
 
-    // BroadcastReceiver para manejar cambios en la conectividad de red
+    // BroadcastReceiver para manejar cambios en la conectividad de red https://developer.android.com/reference/android/content/BroadcastReceiver
     private val estadoRedReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             actualizarTipoRed() // Llamo al método para comprobar tipo conexión
@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializar variables
         textoRed = findViewById(R.id.wifiText)
-        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager // https://developer.android.com/reference/android/net/ConnectivityManager
 
         // Registrar el BroadcastReceiver para cambios en la conectividad de red
         registerReceiver(estadoRedReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
      * Actualiza el estado de la red
      */
     private fun actualizarTipoRed() {
-        // Obtener las capacidades de la red activa
+        // Obtener las capacidades de la red activa https://developer.android.com/reference/android/net/NetworkCapabilities
         val networkCapabilities = connectivityManager.activeNetwork?.let {
             connectivityManager.getNetworkCapabilities(it)
         }
